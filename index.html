@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>JaldiRide — Light Theme</title>
+
+  <!-- Google font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <!-- main stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-header">
+        <!-- hidden checkbox (must be sibling of .nav-mobile for CSS to work) -->
+        <input id="nav-toggle" class="nav-toggle" type="checkbox" aria-hidden="true">
+      
+        <!-- hamburger label (also sibling of .nav-mobile) -->
+        <label for="nav-toggle" class="hamburger" aria-hidden="false" role="button" aria-label="Open menu">
+          <span class="hamburger-box"><span class="hamburger-inner"></span></span>
+        </label>
+      
+        <div class="wrap nav-row">
+          <a class="brand" href="#">
+            <!-- Optional image logo -->
+            <img src="jaldilogo.jpeg" alt="JaldiRide logo" class="brand-img" onerror="this.style.display='none'">
+            <!-- fallback can be added if you want -->
+            <span class="brand-text">
+              <strong>JaldiRide</strong>
+           
+            </span>
+          </a>
+      
+          <!-- Desktop nav (visible on wide screens) -->
+          <nav class="nav-desktop" aria-label="Main Navigation">
+            <a href="#about">About</a>
+            <a href="#how">How It Works</a>
+            <a href="#features">Features</a>
+            <a href="#drivers">Drivers</a>
+            <a href="#contact">Contact</a>
+            <a class="btn btn-primary" href="#book">Book a Ride</a>
+          </nav>
+        </div>
+      
+        <!-- Mobile nav (revealed when #nav-toggle is checked) -->
+        <nav class="nav-mobile" aria-label="Mobile Navigation">
+          <a href="#about">About</a>
+          <a href="#how">How It Works</a>
+          <a href="#features">Features</a>
+          <a href="#drivers">Drivers</a>
+          <a href="#contact">Contact</a>
+          <a class="btn btn-primary" href="#book">Book a Ride</a>
+        </nav>
+      </header>
+      
+      
+
+  <!-- Hero -->
+  <main>
+    <section class="hero">
+      <div class="wrap hero-inner">
+        <div class="hero-text">
+          <h1>Book Autos, Buses &amp; Cars Instantly.</h1>
+          <p class="lead">JaldiRide Connect brings all your travel options to one place — book, track, and ride securely.</p>
+
+          <div class="hero-ctas">
+            <a id="book" class="btn btn-primary" href="#how">Book a Ride</a>
+            <a class="btn btn-outline" href="#drivers">Join as Driver</a>
+          </div>
+        </div>
+
+        <div class="hero-card" aria-label="App demo preview">
+            <!-- video element: autoplay mute loop + playsinline for mobile -->
+            <video id="demoVideo"
+                   class="demo-video"
+                   src="demo.mp4"
+                   poster="poster.jpg"
+                   autoplay
+                   muted
+                   loop
+                   playsinline
+                   preload="metadata"
+                   aria-hidden="false"></video>
+          
+            <!-- decorative overlay with a subtle shine and play control for users who want to pause -->
+            <div class="video-overlay" aria-hidden="true">
+              <button id="videoToggle" class="video-toggle" title="Pause / Play demo" aria-pressed="false">
+                <span class="vis">Play / Pause</span>
+                <!-- using CSS to draw an icon -->
+                <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M5 3v18l15-9L5 3z" fill="currentColor"/>
+                </svg>
+              </button>
+            </div>
+          
+            <!-- fallback content if video not supported -->
+            <div class="video-fallback" aria-hidden="true">
+              <img src="poster.jpg" alt="App demo preview" />
+            </div>
+          </div>
+          
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section id="how" class="section how">
+      <div class="wrap">
+        <h2>How It Works</h2>
+        <p class="muted">Getting started is simple. Follow these three easy steps.</p>
+
+        <div class="steps">
+          <article class="step">
+            <div class="icon">📍</div>
+            <h3>Enter Pickup &amp; Drop</h3>
+            <p>Simply enter your location and destination to get started.</p>
+          </article>
+
+          <article class="step">
+            <div class="icon">🚗</div>
+            <h3>Choose Vehicle Type</h3>
+            <p>Select from autos, buses or cars based on preference.</p>
+          </article>
+
+          <article class="step">
+            <div class="icon">🔒</div>
+            <h3>Confirm with OTP</h3>
+            <p>Secure your ride with OTP verification and start your journey.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="section features">
+      <div class="wrap">
+        <h2>Key Features</h2>
+        <p class="muted">Everything you need for a safe and seamless journey</p>
+
+        <div class="feature-grid">
+          <div class="feature">
+            <div class="f-icon">🧭</div>
+            <h4>Real-time Tracking</h4>
+            <p class="muted">Track your ride in real-time on the map with live updates.</p>
+          </div>
+          <div class="feature">
+            <div class="f-icon">💺</div>
+            <h4>Seat Selection</h4>
+            <p class="muted">Choose your preferred seat when booking buses.</p>
+          </div>
+          <div class="feature">
+            <div class="f-icon">📞</div>
+            <h4>Masked Number Calls</h4>
+            <p class="muted">Protected communication between riders and drivers.</p>
+          </div>
+
+          <div class="feature">
+            <div class="f-icon">🔐</div>
+            <h4>OTP-Secured Rides</h4>
+            <p class="muted">Every ride starts with secure OTP verification.</p>
+          </div>
+          <div class="feature">
+            <div class="f-icon">💳</div>
+            <h4>Digital Payments</h4>
+            <p class="muted">Wallet integration with multiple payment options.</p>
+          </div>
+          <div class="feature">
+            <div class="f-icon">⭐</div>
+            <h4>Driver Ratings</h4>
+            <p class="muted">Rate drivers and ensure quality service every time.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Drivers -->
+    <section id="drivers" class="section drivers">
+      <div class="wrap two-col">
+        <div>
+          <small class="pill">For Drivers &amp; Operators</small>
+          <h2>Drive Your Success</h2>
+          <p class="muted">Join thousands of drivers earning more with JaldiRide Connect. Manage multiple vehicles, track earnings in real-time, and grow your business.</p>
+
+          <ul class="benefits">
+            <li>Accept rides instantly</li>
+            <li>Track your earnings live</li>
+            <li>Flexible working hours</li>
+            <li>Insurance &amp; safety support</li>
+          </ul>
+
+          <a class="btn btn-primary" href="#contact">Join JaldiRide Network</a>
+        </div>
+
+        <aside class="dashboard-preview" aria-hidden="true">
+          <div class="earn-card">
+            <div class="earn-amount">₹2,847</div>
+            <div class="earn-sub muted">+23% from yesterday</div>
+            <div class="stats">
+              <div><strong>847</strong><span class="muted">Total rides</span></div>
+              <div><strong>4.9</strong><span class="muted">Rating</span></div>
+            </div>
+            <div class="request muted">Active request • ₹230 • 5.2 km away <button class="btn accept">Accept</button></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section contact">
+      <div class="wrap two-col">
+        <div>
+          <h2>Get in Touch</h2>
+          <p class="muted">Have questions? We'd love to hear from you.</p>
+
+          <div class="contact-info">
+            <div><strong>Email</strong><p class="muted">support@jaldiride.com</p></div>
+            <div><strong>Phone</strong><p class="muted">+91 98765 43210</p></div>
+            <div><strong>Address</strong><p class="muted">Mumbai, Maharashtra, India</p></div>
+          </div>
+
+          <div class="business-hours card">
+            <h4>Business Hours</h4>
+            <p class="muted">Mon - Fri: 9:00 AM - 6:00 PM<br>Sat: 10:00 AM - 4:00 PM<br>Sun: Closed</p>
+          </div>
+        </div>
+
+        <form class="card contact-form" aria-label="Contact form">
+          <label>
+            <span class="label">Name</span>
+            <input type="text" name="name" placeholder="Your full name" />
+          </label>
+
+          <label>
+            <span class="label">Email</span>
+            <input type="email" name="email" placeholder="your@email.com" />
+          </label>
+
+          <label>
+            <span class="label">Phone</span>
+            <input type="tel" name="phone" placeholder="+91 98765 43210" />
+          </label>
+
+          <label>
+            <span class="label">Message</span>
+            <textarea name="message" rows="5" placeholder="Tell us how we can help you..."></textarea>
+          </label>
+
+          <div style="text-align:right">
+            <button class="btn btn-primary" type="submit">Send Message</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- CTA & footer stats -->
+    <section class="section cta">
+      <div class="wrap center">
+        <h2>Ready to Ride Smarter?</h2>
+        <p class="muted">Join thousands who already trust JaldiRide Connect for their daily commute</p>
+
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#book">Book a Ride</a>
+          <a class="btn btn-outline" href="#drivers">Partner with Us</a>
+        </div>
+
+        <div class="metrics">
+          <div><strong>10,000+</strong><span class="muted">Daily Rides</span></div>
+          <div><strong>4.9</strong><span class="muted">User Rating</span></div>
+          <div><strong>15+</strong><span class="muted">Cities</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>
+        <h4>JaldiRide Connect</h4>
+        <p class="muted">Your trusted partner for seamless transport solutions across India.</p>
+      </div>
+
+      <div>
+        <h4>Quick Links</h4>
+        <nav class="muted">
+          <a href="#about">About Us</a><br>
+          <a href="#how">How It Works</a><br>
+          <a href="#features">Safety</a><br>
+          <a href="#contact">Blog</a>
+        </nav>
+      </div>
+
+      <div>
+        <h4>For Partners</h4>
+        <nav class="muted">
+          <a href="#drivers">Become a Driver</a><br>
+          <a href="#drivers">Operator Portal</a><br>
+          <a href="#drivers">Fleet Management</a>
+        </nav>
+      </div>
+
+      <div>
+        <h4>Legal</h4>
+        <nav class="muted">
+          <a href="#">Privacy Policy</a><br>
+          <a href="#">Terms of Service</a><br>
+          <a href="#">Contact</a>
+        </nav>
+      </div>
+    </div>
+
+    <div class="wrap footer-bottom">
+      <small class="muted">© <span id="year"></span> JaldiRide Connect. All rights reserved.</small>
+    </div>
+  </footer>
+
+  <script src="sript.js"></script>
+</body>
+</html>
