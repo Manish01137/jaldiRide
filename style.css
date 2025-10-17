@@ -427,7 +427,7 @@
     display:block;
     object-fit:cover;
     aspect-ratio:16/9;
-    vertical-align:middle;
+    vertical-align: middle;
     background: #111; /* fallback color behind poster */
   }
   
@@ -2419,4 +2419,95 @@ html, body {
   .footer-grid {
     overflow-x: hidden;
   }
+ 
   
+  /* HERO CARD - thin border, subtle glass, soft shadow */
+.hero-card {
+  --card-radius: 16px;
+  --border-color: rgba(255,255,255,0.06); /* light theme adjust as needed */
+  --shadow: 0 10px 30px rgba(2,6,23,0.35);
+  position: relative;
+  width: 100%;
+  max-width: 640px;        /* adjust */
+  margin: 0 auto;
+  padding: 14px;           /* inner padding around the video */
+  border-radius: var(--card-radius);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid var(--border-color); /* thin border */
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  -webkit-backdrop-filter: blur(6px); /* subtle glass effect (optional) */
+  backdrop-filter: blur(6px);
+}
+
+/* make the video fill the card but retain rounded corners */
+.demo-video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  object-fit: cover; /* fill nicely */
+  background: #000;  /* fallback while loading */
+}
+
+/* overlay for a soft shine (decorative) */
+.hero-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(255,255,255,0.00), rgba(255,255,255,0.02) 60%);
+  mix-blend-mode: overlay;
+  border-radius: inherit;
+}
+
+/* play/pause button styling */
+.video-overlay {
+  position: absolute;
+  inset: 0; /* cover whole card so button can be positioned relative */
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 12px;
+  pointer-events: none; /* allow button to be the only interactive element */
+}
+
+.video-toggle {
+  pointer-events: auto;
+  background: linear-gradient(135deg, #6c5cff, #7fd3ff);
+  border: none;
+  color: white;
+  width: 52px;
+  height: 52px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(16,24,40,0.45);
+  transform: translateY(4px);
+  cursor: pointer;
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+/* small pressed state */
+.video-toggle[aria-pressed="true"]{
+  transform: translateY(0);
+  box-shadow: 0 6px 18px rgba(16,24,40,0.35);
+  opacity: 0.98;
+}
+
+/* icon sizing */
+.video-toggle .icon { width: 20px; height: 20px; color: white; }
+
+/* fallback image appearance */
+.video-fallback img {
+  width: 100%;
+  display: block;
+  border-radius: 10px;
+}
+
+/* Responsive tweaks */
+@media (max-width: 640px) {
+  .hero-card { padding: 10px; max-width: 92vw; }
+  .video-toggle { width:44px; height:44px; }
+}
