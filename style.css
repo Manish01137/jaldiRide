@@ -2740,3 +2740,101 @@ html, body {
   padding: 0 24px;
 }
 
+/* ----------------------------
+  CONTACT — mobile responsiveness fixes
+  Paste this after your existing contact styles
+----------------------------*/
+
+/* Base: ensure the container can shrink on narrow screens */
+.contact .wrap.two-col {
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 0 18px;
+  box-sizing: border-box;
+}
+
+/* Mobile-first stacking for small screens */
+@media (max-width: 900px) {
+  .contact .wrap.two-col {
+    display: grid;
+    grid-template-columns: 1fr;    /* single column */
+    gap: 28px;                     /* breathing room between stacked blocks */
+    align-items: start;            /* left content first on top */
+    justify-items: stretch;
+  }
+
+  /* Make left/info column full width and centered content */
+  .contact .wrap.two-col > div:first-child {
+    width: 100%;
+    margin: 0 auto;
+    text-align: left; /* keep left alignment for contact items, change if you want center */
+  }
+
+  /* Contact info cards: full width and consistent padding */
+  .contact-info > div {
+    width: 100%;
+    margin: 0 0 12px;
+    padding: 14px;
+    border-radius: 12px;
+    box-shadow: 0 10px 26px rgba(16,24,40,0.04);
+  }
+
+  /* Business hours card: full width */
+  .business-hours.card {
+    width: 100%;
+    padding: 18px;
+    margin-top: 6px;
+  }
+
+  /* Form card: full width and sits below the info */
+  .contact-form.card {
+    width: 100%;
+    padding: 18px;
+    box-shadow: 0 22px 48px rgba(16,24,40,0.06);
+    border-radius: 14px;
+    transform: none !important;   /* remove any translate animation that affected layout */
+    opacity: 1 !important;
+  }
+
+  /* Make inputs use full width and comfortable touch sizes */
+  .contact-form input,
+  .contact-form textarea {
+    padding: 14px;
+    font-size: 15px;
+    border-radius: 10px;
+  }
+
+  /* Floating labels still work — ensure placeholder remains a single space in HTML */
+  .contact-form .label {
+    left: 12px;
+    top: 12px;
+    font-size: 13px;
+  }
+
+  /* Submit button full width, comfortable touch area */
+  .contact-form .btn.btn-primary {
+    width: 100%;
+    display: block;
+    padding: 12px;
+    margin-top: 4px;
+    font-size: 15px;
+    border-radius: 12px;
+  }
+
+  /* Reduce left column heading size for small screens */
+  .contact h2 { font-size: 28px; margin-bottom: 8px; }
+  .contact p.muted { font-size: 15px; }
+
+  /* Slightly reduce overall padding for mobile */
+  .section.contact { padding: 48px 0; }
+}
+
+/* Very small phones: tighten up spacing */
+@media (max-width: 420px) {
+  .contact .wrap.two-col { padding: 0 14px; gap: 20px; }
+  .contact h2 { font-size: 24px; }
+  .contact-form textarea { min-height: 110px; }
+  .contact-form .label { font-size: 12px; left: 10px; top: 10px; }
+  .contact-form input, .contact-form textarea { padding: 12px; font-size: 14px; }
+  .contact-info > div { padding: 12px; }
+}
