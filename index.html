@@ -254,51 +254,70 @@
     </section>
 
     <!-- Contact -->
-    <section id="contact" class="section contact">
-      <div class="wrap two-col">
+   <!-- Contact Section -->
+<section id="contact" class="section contact">
+  <div class="wrap two-col">
+    <!-- Left column -->
+    <div>
+      <h2>Get in Touch</h2>
+      <p class="muted">Have questions? We'd love to hear from you.</p>
+
+      <div class="contact-info">
         <div>
-          <h2>Get in Touch</h2>
-          <p class="muted">Have questions? We'd love to hear from you.</p>
-
-          <div class="contact-info">
-            <div><strong>Email</strong><p class="muted">support@jaldiride.com</p></div>
-            <div><strong>Phone</strong><p class="muted">+91 98765 43210</p></div>
-            <div><strong>Address</strong><p class="muted">Mumbai, Maharashtra, India</p></div>
-          </div>
-
-          <div class="business-hours card">
-            <h4>Business Hours</h4>
-            <p class="muted">Mon - Fri: 9:00 AM - 6:00 PM<br>Sat: 10:00 AM - 4:00 PM<br>Sun: Closed</p>
-          </div>
+          <strong>Email</strong>
+          <p class="muted">support@jaldiride.com</p>
         </div>
 
-        <form class="card contact-form" aria-label="Contact form">
-          <label>
-            <span class="label">Name</span>
-            <input type="text" name="name" placeholder="Your full name" />
-          </label>
+        <div>
+          <strong>Phone</strong>
+          <p class="muted">+91 98765 43210</p>
+        </div>
 
-          <label>
-            <span class="label">Email</span>
-            <input type="email" name="email" placeholder="your@email.com" />
-          </label>
-
-          <label>
-            <span class="label">Phone</span>
-            <input type="tel" name="phone" placeholder="+91 98765 43210" />
-          </label>
-
-          <label>
-            <span class="label">Message</span>
-            <textarea name="message" rows="5" placeholder="Tell us how we can help you..."></textarea>
-          </label>
-
-          <div style="text-align:right">
-            <button class="btn btn-primary" type="submit">Send Message</button>
-          </div>
-        </form>
+        <div>
+          <strong>Address</strong>
+          <p class="muted">Mumbai, Maharashtra, India</p>
+        </div>
       </div>
-    </section>
+
+      <div class="business-hours card">
+        <h4>Business Hours</h4>
+        <p class="muted">
+          Mon - Fri: 9:00 AM - 6:00 PM<br>
+          Sat: 10:00 AM - 4:00 PM<br>
+          Sun: Closed
+        </p>
+      </div>
+    </div>
+
+    <!-- Right column (form) -->
+    <form class="card contact-form" aria-label="Contact form">
+      <label>
+        <input type="text" name="name" placeholder=" " required />
+        <span class="label">Name</span>
+      </label>
+
+      <label>
+        <input type="email" name="email" placeholder=" " required />
+        <span class="label">Email</span>
+      </label>
+
+      <label>
+        <input type="tel" name="phone" placeholder=" " />
+        <span class="label">Phone</span>
+      </label>
+
+      <label>
+        <textarea name="message" rows="5" placeholder=" " required></textarea>
+        <span class="label">Message</span>
+      </label>
+
+      <div style="text-align:right;">
+        <button class="btn btn-primary" type="submit">Send Message</button>
+      </div>
+    </form>
+  </div>
+</section>
+
 
     <!-- CTA & footer stats -->
     <section class="section cta">
@@ -333,7 +352,7 @@
           <a href="#about">About Us</a><br>
           <a href="#how">How It Works</a><br>
           <a href="#features">Safety</a><br>
-          <a href="#contact">Blog</a>
+         
         </nav>
       </div>
 
@@ -357,7 +376,7 @@
     </div>
 
     <div class="wrap footer-bottom">
-      <small class="muted">© <span id="year"></span> JaldiRide Connect. All rights reserved.</small>
+      <small class="muted">© <span id="year"></span> JaldiRide Connect. All rights reserved. Powered By AeroDip</small>
     </div>
   </footer>
 
