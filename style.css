@@ -3002,3 +3002,117 @@ html, body { overflow-x: hidden; }
 .earn-card::-webkit-scrollbar {
   display: none; /* Chrome/Safari/Edge */
 }
+
+/* -----------------------------
+   CTA SECTION — Responsive fix & remove vertical scroll
+------------------------------*/
+
+/* Ensure no accidental overflow */
+.section.cta,
+.section.cta * {
+  box-sizing: border-box;
+}
+
+.section.cta {
+  position: relative;
+  overflow: hidden; /* ✅ Prevent vertical or horizontal scrollbar */
+  padding: 100px 0;
+  background: linear-gradient(180deg, #ffffff 0%, #f8f9ff 100%);
+}
+
+/* Center content cleanly */
+.section.cta .wrap.center {
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+  overflow: hidden; /* ✅ No internal scrollbars */
+}
+
+/* Headline & text */
+.section.cta h2 {
+  font-size: 40px;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+.section.cta p.muted {
+  font-size: 18px;
+  margin-bottom: 40px;
+  color: #6b7280;
+}
+
+/* Call-to-action buttons */
+.section.cta .hero-ctas {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 50px;
+}
+.section.cta .btn {
+  min-width: 160px;
+  font-size: 16px;
+  border-radius: 12px;
+  padding: 12px 22px;
+}
+
+/* Metrics cards */
+.section.cta .metrics {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 40px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 18px;
+  padding: 24px 20px;
+  box-shadow: 0 10px 28px rgba(107, 70, 255, 0.08);
+  overflow: hidden; /* ✅ Prevent inner scrollbars */
+}
+.section.cta .metrics div {
+  text-align: center;
+  min-width: 120px;
+}
+.section.cta .metrics strong {
+  display: block;
+  font-size: 28px;
+  color: var(--accent, #6b46ff);
+}
+.section.cta .metrics .muted {
+  color: #6b7280;
+  font-size: 15px;
+}
+
+/* Animation (optional premium fade-up) */
+@keyframes fadeUpCTA {
+  0% { opacity: 0; transform: translateY(40px) scale(0.98); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.section.cta h2,
+.section.cta p.muted,
+.section.cta .hero-ctas,
+.section.cta .metrics {
+  opacity: 0;
+  animation: fadeUpCTA 0.8s cubic-bezier(.2,.9,.2,1) forwards;
+}
+.section.cta h2 { animation-delay: 0.1s; }
+.section.cta p.muted { animation-delay: 0.2s; }
+.section.cta .hero-ctas { animation-delay: 0.3s; }
+.section.cta .metrics { animation-delay: 0.4s; }
+
+/* Responsive layout */
+@media (max-width: 900px) {
+  .section.cta {
+    padding: 70px 0;
+  }
+  .section.cta h2 {
+    font-size: 30px;
+  }
+  .section.cta p.muted {
+    font-size: 16px;
+  }
+  .section.cta .metrics {
+    flex-direction: column;
+    gap: 24px;
+    padding: 20px;
+  }
+}
