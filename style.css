@@ -2838,3 +2838,167 @@ html, body {
   .contact-form input, .contact-form textarea { padding: 12px; font-size: 14px; }
   .contact-info > div { padding: 12px; }
 }
+/* -----------------------------
+  DRIVERS — responsive fix & no horizontal scroll
+  Paste after your existing drivers rules
+-----------------------------*/
+
+/* safety: prevent accidental horizontal overflow during transforms */
+html, body { overflow-x: hidden; }
+
+/* container improvements */
+.drivers .wrap.two-col {
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr; /* desktop */
+  gap: 60px;
+  align-items: center;              /* align columns vertically */
+  overflow: visible;
+}
+
+/* ensure inner children do not create horizontal overflow while animating */
+.drivers .wrap.two-col > * { min-width: 0; } /* important for flex/grid items */
+
+/* earn-card safe sizing */
+.earn-card {
+  width: 100%;
+  max-width: 480px;
+  box-sizing: border-box;
+}
+
+/* remove any transform that might push outside viewport on small screens */
+@media (max-width: 960px) {
+  .drivers .wrap.two-col {
+    grid-template-columns: 1fr;  /* stack */
+    gap: 36px;
+    align-items: start;          /* left (text) on top) */
+    justify-items: stretch;
+  }
+
+  /* keep left content full width */
+  .drivers .wrap.two-col > div:first-child {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  /* dashboard below the text and centered */
+  .dashboard-preview {
+    width: 100%;
+    max-width: 720px;    /* allow wider on tablet */
+    justify-self: center;
+    transform: none !important;  /* prevent leftover translateX causing overflow */
+    animation: slideInBottom 0.9s cubic-bezier(.2,.9,.2,1) .15s both;
+  }
+
+  /* earn-card responsive appearance */
+  .earn-card {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 22px;
+  }
+
+  /* reduce font sizes/spacing to fit smaller screens */
+  .drivers h2 { font-size: 30px; line-height:1.12; }
+  .drivers .muted { font-size: 15px; }
+  .benefits li { font-size: 15px; padding-left: 24px; }
+}
+
+/* ensure transforms used for desktop animations don't create horizontal scroll
+   when items are off-screen during the animation. Clips overflow visually
+   but keeps animation visible. */
+.drivers,
+.drivers .wrap,
+.drivers .two-col,
+.earn-card {
+  -webkit-overflow-scrolling: touch;
+  overflow-x: hidden;
+}
+
+/* optional: a gentle slide-in-from-bottom for mobile dashboard */
+@keyframes slideInBottom {
+  0% { opacity: 0; transform: translateY(40px) scale(.98); }
+  60% { opacity: 1; transform: translateY(-8px) scale(1.01); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Accessibility: prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-preview, .earn-card, .drivers .wrap.two-col > div:first-child {
+    animation: none !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+
+/* ---------- Fix: remove unwanted inner scrollbar from dashboard card ---------- */
+/* keep box-sizing predictable */
+.earn-card, .dashboard-preview, .dashboard-preview * {
+  box-sizing: border-box;
+}
+
+/* Ensure the card expands naturally and never forces an inner scroll.
+   Remove any fixed heights and allow content to wrap. */
+.earn-card {
+  width: 100%;
+  max-width: 560px;        /* keep card limited on large screens */
+  min-width: 0;            /* prevents grid children from forcing overflow */
+  padding: 22px;
+  overflow: hidden;        /* no internal scrolling */
+  -webkit-overflow-scrolling: auto;
+}
+
+/* Ensure the inner blocks wrap instead of causing overflow */
+.earn-card .stats,
+.earn-card .request {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+/* Make request area wrap text and keep the accept button pinned to the right on wide screens */
+.earn-card .request {
+  justify-content: space-between;
+  align-items: center;
+  white-space: normal;     /* allow wrapping if needed */
+}
+
+/* Button sizing so it doesn't force overflow */
+.earn-card .request .btn.accept {
+  flex: 0 0 auto;
+  margin-left: 12px;
+}
+
+/* On narrow screens stack stats/request vertically so nothing overflows */
+@media (max-width: 520px) {
+  .earn-card .stats {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .earn-card .request {
+    width: 100%;
+    margin-top: 12px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .earn-card .request .btn.accept {
+    margin-left: 0;
+    align-self: flex-end; /* keep it to the right but inside the card */
+  }
+}
+
+/* Hide native scrollbar visually for this card (non-destructive) */
+.dashboard-preview,
+.earn-card {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+.dashboard-preview::-webkit-scrollbar,
+.earn-card::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/Edge */
+}
