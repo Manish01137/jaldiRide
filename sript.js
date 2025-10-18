@@ -201,4 +201,129 @@ document.addEventListener('DOMContentLoaded', function () {
   });
  
   
+  /* Scroll reveal: tiny IntersectionObserver + stagger logic
+     - No HTML changes required
+     - Respects prefers-reduced-motion
+  */
+  (function () {
+    if (typeof window === 'undefined') return;
+  
+    // Respect reduced motion: add in-view immediately and stop
+    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) {
+      // find all potential targets and immediately mark as visible
+      const all = document.querySelectorAll(
+        '.section, .about-card, .feature, .step, .member, .earn-card, .hero-text, .cta .metrics, .contact-form.card, .feature-grid .feature, .steps .step, .team-grid .member'
+      );
+      all.forEach(el => {
+        el.classList.add('reveal', 'in-view');
+      });
+      // also handle reveal groups
+      const groups = document.querySelectorAll('.steps, .feature-grid, .team-grid');
+      groups.forEach(g => g.classList.add('reveal-group','in-view'));
+      return;
+    }
+  
+    // selectors for single elements to reveal
+    const singleSelectors = [
+      '.section',
+      '.hero-text',
+      '.about-card',
+      '.earn-card',
+      '.contact-form.card',
+      '.cta .metrics'
+    ];
+  
+    // selectors for groups where children animate staggered
+    const groupSelectors = [
+      '.steps',        // children: .step
+      '.feature-grid', // children: .feature
+      '.team-grid'     // children: .member
+    ];
+  
+    // build node lists
+    const singles = Array.from(document.querySelectorAll(singleSelectors.join(',')));
+    const groups  = Array.from(document.querySelectorAll(groupSelectors.join(',')));
+  
+    // mark elements with base classes
+    singles.forEach(el => {
+      // avoid adding duplicate classes
+      if (!el.classList.contains('reveal')) el.classList.add('reveal');
+      // make large hero text a bit different
+      if (el.classList.contains('hero-text')) el.classList.add('large');
+    });
+  
+    groups.forEach(g => {
+      if (!g.classList.contains('reveal-group')) g.classList.add('reveal-group');
+    });
+  
+    // also reveal smaller repeated items individually (in case they are not inside a group)
+    const extras = Array.from(document.querySelectorAll('.feature-grid .feature, .steps .step, .team-grid .member'));
+    extras.forEach(el => {
+      if (!el.closest('.reveal-group')) {
+        // if item isn't already inside a group (rare), make it a reveal item
+        if (!el.classList.contains('reveal')) el.classList.add('reveal','small');
+      }
+    });
+  
+    // IntersectionObserver options
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px 0px -10% 0px', // start a bit before the element fully enters
+      threshold: 0.12
+    };
+  
+    // Observer callback for single elements
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          // stop observing once revealed
+          obs.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+  
+    singles.forEach(el => observer.observe(el));
+  
+    // For groups, we want to stagger the children when the group enters
+    const groupObserver = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const group = entry.target;
+        const children = Array.from(group.children).filter(Boolean);
+        // base delay and increment
+        const base = 60; // ms
+        children.forEach((child, i) => {
+          // reset any inline style first
+          child.style.transitionDelay = `${i * base}ms`;
+          // set reveal transitions on the child if needed
+          // ensure children have transitions (in case CSS fallback used)
+          child.style.willChange = 'opacity, transform';
+        });
+        // add in-view to parent which uses CSS to reveal children
+        group.classList.add('in-view');
+        // unobserve after reveal
+        obs.unobserve(group);
+      });
+    }, observerOptions);
+  
+    groups.forEach(g => groupObserver.observe(g));
+  
+    // Also observe standalone extras (in case page uses them)
+    extras.forEach(el => {
+      if (!el.closest('.reveal-group')) observer.observe(el);
+    });
+  
+    // optional: once DOM is loaded, reveal the topmost hero quickly (avoid perceived blank)
+    window.addEventListener('load', () => {
+      const heroText = document.querySelector('.hero-text');
+      if (heroText) {
+        heroText.classList.add('in-view');
+      }
+    });
+  
+  })();
+  
+   
   
