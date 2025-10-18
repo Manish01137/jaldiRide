@@ -411,19 +411,57 @@
       <div class="wrap center">
         <h2>Ready to Ride Smarter?</h2>
         <p class="muted">Join thousands who already trust JaldiRide Connect for their daily commute</p>
-
+    
         <div class="hero-ctas">
           <a class="btn btn-primary" href="#book">Book a Ride</a>
           <a class="btn btn-outline" href="#drivers">Partner with Us</a>
         </div>
-
+    
         <div class="metrics">
-          <div><strong>10,000+</strong><span class="muted">Daily Rides</span></div>
-          <div><strong>4.9</strong><span class="muted">User Rating</span></div>
-          <div><strong>15+</strong><span class="muted">Cities</span></div>
+          <div><strong class="count" data-target="10000">0</strong><span class="muted">Daily Rides</span></div>
+          <div><strong class="count" data-target="4.9">0</strong><span class="muted">User Rating</span></div>
+          <div><strong class="count" data-target="15">0</strong><span class="muted">Cities</span></div>
         </div>
       </div>
     </section>
+    
+    <script>
+      // Function to animate the counter
+      function animateCountUp(el, target, duration = 1500) {
+        const isFloat = target % 1 !== 0;
+        const start = 0;
+        const range = target - start;
+        const startTime = performance.now();
+    
+        function update(currentTime) {
+          const progress = Math.min((currentTime - startTime) / duration, 1);
+          const value = start + range * progress;
+          el.textContent = isFloat ? value.toFixed(1) : Math.floor(value);
+          if (progress < 1) requestAnimationFrame(update);
+        }
+    
+        requestAnimationFrame(update);
+      }
+    
+      // Trigger the count-up when the section is visible
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const counters = entry.target.querySelectorAll('.count');
+            counters.forEach(counter => {
+              const target = parseFloat(counter.getAttribute('data-target'));
+              animateCountUp(counter, target);
+            });
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.3 });
+    
+      observer.observe(document.querySelector('.metrics'));
+    </script>
+    
+
+
   </main>
 
   <footer class="site-footer">
